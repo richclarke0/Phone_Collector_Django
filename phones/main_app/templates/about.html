@@ -1,3 +1,7 @@
+{%extends 'base.html'%}  
+{% comment %} must be the first tag in the template lol {% endcomment %}
+
+
 {% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +12,10 @@
 </head>
 <body> {% endcomment %}
 
-    {%extends 'base.html'%}
     {%block content%}
-    <h1>Phones Guy</h1>
+    <a href="/phones">
+        <h1>Phones Guy</h1>
+    </a>
 
     <p>Fix your phone, buy a phone, it's the phones guy!</p>
     {%endblock%}
