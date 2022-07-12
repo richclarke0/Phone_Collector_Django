@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+#import http
+from django.http import HttpResponse
+
+#define home view
+def home(request):
+    return HttpResponse('<a href="/phones">PHONES!</a>')
