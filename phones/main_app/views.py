@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 #define home view
 def home(request):
-    return HttpResponse('<a href="/phones">PHONES!</a>')
+    return HttpResponse('HAVE SOME OF THESE <a href="/phones">PHONES!</a>')
