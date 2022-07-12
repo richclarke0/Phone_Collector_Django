@@ -5,5 +5,5 @@ from . import views
 # views represents views.py model
 
 urlpatterns = [
-
+    path('', views.home, name='home'),
 ]
