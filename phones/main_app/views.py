@@ -1,3 +1,15 @@
+class Phone:
+    def __init__(self, manufacturer, model):
+        self.manufacturer = manufacturer
+        self.model = model
+phones = [
+    Phone("HTC", "G1"),
+    Phone("Motorola", "Razr"),
+    Phone("OnePlus", "Nord N10 5G"),
+    Phone("Dixie", "Two Cups and a String")
+]
+
+
 from django.shortcuts import render
 
 #import http
@@ -11,3 +23,6 @@ def home(request):
 #     return HttpResponse("what are you all about?")
 def about(request):
     return render(request, 'about.html')
+
+def cats_index(request):
+  return render(request, 'phones/index.html', { 'phones': phones })
