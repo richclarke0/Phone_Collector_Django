@@ -7,4 +7,6 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
+    #add new phones route for index of phones
+    path('phones/', views.phones_index, name='index'),
 ]
