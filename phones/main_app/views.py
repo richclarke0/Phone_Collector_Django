@@ -1,8 +1,8 @@
-class Phone:
-    def __init__(self, manufacturer, model, img):
-        self.manufacturer = manufacturer
-        self.model = model
-        self.img = img
+# class Phone:
+#     def __init__(self, manufacturer, model, img):
+#         self.manufacturer = manufacturer
+#         self.model = model
+#         self.img = img
 phones = [
     Phone("HTC", "G1", "https://o.aolcdn.com/images/dims?image_uri=https%3A%2F%2Fs3.amazonaws.com%2Fengadget-public-production%2Fproduct%2F1%2F15p%2Fdream-2vr.jpg&thumbnail=640%2C&client=49kdj93ncb8s938hkdo&signature=e02dbe47fd64583e40425f6df79e4ff9223073ec"),
     Phone("Motorola", "Razr","https://motorolacaen.vtexassets.com/arquivos/ids/155395/155395.png?v=637203243806100000"),
@@ -10,11 +10,19 @@ phones = [
     Phone("Dixie", "Two Cups and a String", "https://media.istockphoto.com/photos/string-telephone-cups-picture-id1190214378?k=20&m=1190214378&s=612x612&w=0&h=i9IAOxXy6jRwK6H2ZQYhoekLKRl6nzgTz3vEgMnnN9g=")
 ]
 
+#this is a django Model
+# Models are used to perform CRUD in the database
+class Phone(models.Model):
+    manufacturer = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+    img = models.CharField(max_length=500)
+
 
 from django.shortcuts import render
 
 #import http
-from django.http import HttpResponse
+# from django.http import HttpResponse
+# no longer using HttpResponse since we actually return a page for home now 
 
 #define home view
 def home(request):
