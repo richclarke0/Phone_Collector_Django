@@ -1,13 +1,13 @@
+#this is our old phone class from before we defined the model and added to database
 # class Phone:
 #     def __init__(self, manufacturer, model, img):
 #         self.manufacturer = manufacturer
 #         self.model = model
 #         self.img = img
 
-
-
-
 from django.shortcuts import render
+#lets import our database access
+from .models import Phone
 
 
 #import http
@@ -25,4 +25,6 @@ def about(request):
     return render(request, 'about.html')
 
 def phones_index(request):
+  #added this line below once we imported Phone from models
+  phones = Phone.objects.all() # command just like in the terminal with "python3 manage.py shell"!
   return render(request, 'phones/index.html', { 'phones': phones })
