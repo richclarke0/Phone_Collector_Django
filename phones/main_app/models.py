@@ -1,5 +1,7 @@
 from django.db import models
 
+#this is a django Model
+# Models are used to perform CRUD in the database
 # Create your models here.
 class Phone(models.Model):
     manufacturer = models.CharField(max_length=100)

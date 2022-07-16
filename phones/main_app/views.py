@@ -4,11 +4,11 @@
 #         self.model = model
 #         self.img = img
 
-#this is a django Model
-# Models are used to perform CRUD in the database
+
 
 
 from django.shortcuts import render
+
 
 #import http
 # from django.http import HttpResponse
