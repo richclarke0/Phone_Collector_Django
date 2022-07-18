@@ -1,5 +1,14 @@
 from django.db import models
 
+ACCESSORIES = (
+    ('charger', 'Phone charger with cable'),
+    ('phones', 'Headphones'),
+    ('case', 'A hard plastic phone case'),
+    ('screenprotector', 'A stick-on screen protector to prevent scratches')
+)
+
+
+
 #this is a django Model
 # Models are used to perform CRUD in the database
 # Create your models here.
@@ -9,6 +18,35 @@ class Phone(models.Model):
     img = models.CharField(max_length=1000)
     def __str__(self):
         return f"{self.manufacturer} {self.model}"
+
+class Accessory(models.Model):
+    date = models.DateField("Date purchased") #this is the actual label on the form
+    item = models.CharField(
+        max_length = 25,
+        choices=ACCESSORIES,
+        default=ACCESSORIES[0][0]
+    )
+
+    phone = models.ForeignKey(Phone, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.get_item_display()} on {self.date}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # phones = [
 #     ("HTC", "G1", "https://o.aolcdn.com/images/dims?image_uri=https%3A%2F%2Fs3.amazonaws.com%2Fengadget-public-production%2Fproduct%2F1%2F15p%2Fdream-2vr.jpg&thumbnail=640%2C&client=49kdj93ncb8s938hkdo&signature=e02dbe47fd64583e40425f6df79e4ff9223073ec"),
