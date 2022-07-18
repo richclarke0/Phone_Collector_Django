@@ -9,4 +9,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     #add new phones route for index of phones
     path('phones/', views.phones_index, name='index'),
+    # detail page
+    path('phones/<int:phone_id>/', views.phones_detail, name='detail'),
+
 ]

@@ -28,3 +28,9 @@ def phones_index(request):
   #added this line below once we imported Phone from models
   phones = Phone.objects.all() # command just like in the terminal with "python3 manage.py shell"!
   return render(request, 'phones/index.html', { 'phones': phones })
+
+#detail page
+def phones_detail(request, phone_id):
+    #function receives phone_id from the url in the path established in urls.py
+    phone = Phone.objects.get(id=phone_id)
+    return render(request, 'phones/detail.html', { 'phone': phone })
