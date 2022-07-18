@@ -5,7 +5,8 @@
 
 {% for phone in phones %}
   <div class="card row hoverable">
-    <a href="/phones/{{ phone.id }}">
+    {% comment %} <a href="/phones/{{ phone.id }}"> old way {% endcomment %}
+    <a href="{% url 'detail' phone.id %}">
       <div class="card-content">
         <div class="row">
             <div class="col s9">
