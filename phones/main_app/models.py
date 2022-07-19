@@ -32,6 +32,8 @@ class Accessory(models.Model):
 
     def __str__(self):
         return f"{self.get_item_display()} on {self.date}"
+    
+    class Meta: ordering = ['-date']
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"phone_id": self.id})

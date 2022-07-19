@@ -5,7 +5,7 @@
 #         self.model = model
 #         self.img = img
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -43,6 +43,14 @@ def phones_detail(request, phone_id):
         'phone' : phone,
         'accessory_form' : accessory_form
         })
+
+def add_item(request, phone_id):
+    form=AccessoryForm(request.POST)
+    if form.is_valid():
+        new_item = form.save(commit=False)
+        new_item.phone_id = phone_id
+        new_item.save()
+    return redirect('detail', phone_id=phone_id)
 
 class PhoneCreate(CreateView):
     model = Phone

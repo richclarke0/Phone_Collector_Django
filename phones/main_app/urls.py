@@ -15,5 +15,5 @@ urlpatterns = [
     path('phones/create/', views.PhoneCreate.as_view(), name='phones_create'),
     path('phones/<int:pk>/update/', views.PhoneUpdate.as_view(), name='phones_update'),
     path('phones/<int:pk>/delete/', views.PhoneDelete.as_view(), name='phones_delete'),
-
+    path('phones/<int:phone_id>/add_item', views.add_item, name='add_item')
 ]
