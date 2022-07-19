@@ -15,7 +15,7 @@ from .models import Phone, Band
 from .forms import AccessoryForm
 
 
-#import http
+#import http``
 # from django.http import HttpResponse
 # no longer using HttpResponse since we actually return a page for home now 
 
