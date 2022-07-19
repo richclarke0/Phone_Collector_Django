@@ -47,3 +47,4 @@ def phones_detail(request, phone_id):
 class PhoneCreate(CreateView):
     model = Phone
     fields = '__all__'
+    success_url="/phones/"
