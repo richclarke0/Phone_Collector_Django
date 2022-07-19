@@ -49,7 +49,7 @@
 {% comment %} this is the panel at the bottom with bands and other stuff {% endcomment %}
 <div class="row">
   <div class="col s6">
-    <h5>{{phone.manufacturer}} {{phone.model}} available bands:</h5>
+    <h5>{{phone.manufacturer}} {{phone.model}} <br> supported bands:</h5>
     {% if phone.bands.count %}
       {% for band in phone.bands.all %}
       <div class="card">
@@ -66,7 +66,28 @@
   </div>
 {% comment %} phone's bands end  {% endcomment %}
 {% comment %} available bands begin  {% endcomment %}
-
+<div class="col s6">
+  <h5>Unsupported Bands:</h5>
+  {% if bands.count %}
+    {% for band in bands.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          <div>{{band.type}}</div>
+        </span>
+      </div>
+      <div class="card-action">
+        <form action="" method="post">
+          {% csrf_token %}
+          <button class="btn" type="submit">Add Band</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h4>{{phone.manufacturer}} {{phone.model}} supports all modern bands.</h4>
+  {% endif %}
+</div>
 {% comment %} available bands end  {% endcomment %}
 </div>
 

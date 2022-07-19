@@ -38,11 +38,13 @@ def phones_index(request):
 def phones_detail(request, phone_id):
     #function receives phone_id from the url in the path established in urls.py
     phone = Phone.objects.get(id=phone_id)
+    bands_phone_doesnt_have = Band.objects.exclude(id__in = phone.bands.all().values_list('id'))
     #form for accessory add
     accessory_form = AccessoryForm()
     return render(request, 'phones/detail.html', { 
         'phone' : phone,
-        'accessory_form' : accessory_form
+        'accessory_form' : accessory_form,
+        'bands': bands_phone_doesnt_have
         })
 
 def add_item(request, phone_id):
