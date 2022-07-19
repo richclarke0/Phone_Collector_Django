@@ -19,7 +19,7 @@ class Band(models.Model):
         return self.type
     def get_absolute_url(self):
         return reverse("bands_detail", kwargs={"pk": self.id})
-        
+
 class Phone(models.Model):
     manufacturer = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
@@ -49,8 +49,12 @@ class Accessory(models.Model):
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"phone_id": self.id})
-    
-    
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    phone = models.ForeignKey(Phone, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"Photo of phone_id: {self.phone_id} @{self.url}"
 
 
 

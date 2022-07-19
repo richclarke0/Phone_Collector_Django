@@ -4,15 +4,30 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">{{ phone.model }}</span>
-        <p>{{ phone.manufacturer }}</p>
-        <img class="detailimg" src="{{ phone.img }}" alt="{{phone.manufacturer}} {{phone.model}}">
+        <div class="row">
+          <div class="col s8">
+            <span class="card-title">{{ phone.model }}</span>
+            <p>{{ phone.manufacturer }}</p>
+          </div>
+          <img class="detailimg col s4" src="{{ phone.img }}" alt="{{phone.manufacturer}} {{phone.model}}">
+        </div>
       </div>
       <div class="card-action">
         <a href="{% url 'phones_update' phone.id %}">Edit</a>
         <a href="{% url 'phones_delete' phone.id %}">Delete</a>
       </div>
     </div>
+    {% for photo in phone.photo_set.all %}
+      <img class="responsive-img card-panel" src="{{photo.url}}">
+    {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+    {% endfor %}
+    <form action="{% url 'add_photo' phone.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+      {% csrf_token %}
+      <input type="file" name="photo-file">
+      <br><br>
+      <input type="submit" class="btn" value="Upload Photo">
+  </form>
   </div>
   <div class="col s6">
 
@@ -49,7 +64,13 @@
 {% comment %} this is the panel at the bottom with bands and other stuff {% endcomment %}
 <div class="row">
   <div class="col s6">
-    <h5>{{phone.manufacturer}} {{phone.model}} <br> supported bands:</h5>
+    
+    
+  </div>
+{% comment %} phone's bands end  {% endcomment %}
+{% comment %} available bands begin  {% endcomment %}
+<div class="col s6">
+  <h5>{{phone.manufacturer}} {{phone.model}} <br> supported bands:</h5>
     {% if phone.bands.count %}
       {% for band in phone.bands.all %}
       <div class="card">
@@ -63,10 +84,6 @@
     {% else %}
       <h5>Your phone is too ghetto and doesn't support networks. Upgrade from the cup and string.</h5>
     {% endif %}
-  </div>
-{% comment %} phone's bands end  {% endcomment %}
-{% comment %} available bands begin  {% endcomment %}
-<div class="col s6">
   <h5>Unsupported Bands:</h5>
   {% if bands.count %}
     {% for band in bands.all %}
@@ -77,7 +94,7 @@
         </span>
       </div>
       <div class="card-action">
-        <form action="" method="post">
+        <form action="{% url 'assoc_band' phone.id band.id %}" method="post">
           {% csrf_token %}
           <button class="btn" type="submit">Add Band</button>
         </form>

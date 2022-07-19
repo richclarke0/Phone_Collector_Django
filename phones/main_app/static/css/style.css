@@ -23,6 +23,7 @@ footer {
 
 .detailimg {
     /* max-height: 50vh; */
-    max-width: 100%;
-    margin-top: 1em;
+    /* max-width: em; */
+    /* max-height: 6em; */
+    /* margin-top: 1em; */
 }

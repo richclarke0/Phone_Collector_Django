@@ -10,11 +10,15 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
+import uuid
+import boto3
+
 #lets import our database access
-from .models import Phone, Band
+from .models import Phone, Band, Photo
 from .forms import AccessoryForm
 
-
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'phones-guy'
 #import http``
 # from django.http import HttpResponse
 # no longer using HttpResponse since we actually return a page for home now 
@@ -54,6 +58,25 @@ def add_item(request, phone_id):
         new_item.phone_id = phone_id
         new_item.save()
     return redirect('detail', phone_id=phone_id)
+
+def assoc_band(request, phone_id, band_id):
+    Phone.objects.get(id=phone_id).bands.add(band_id)
+    return redirect('detail', phone_id=phone_id)
+
+def add_photo(request, phone_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.Session(profile_name=BUCKET).client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            photo = Photo(url=url, phone_id=phone_id)
+            photo.save()
+        except:
+            print("S3 file upload error")
+    return redirect('detail', phone_id=phone_id)
+
 
 class PhoneCreate(CreateView):
     model = Phone
