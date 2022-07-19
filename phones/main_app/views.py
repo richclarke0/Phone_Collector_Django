@@ -6,8 +6,12 @@
 #         self.img = img
 
 from django.shortcuts import render
+
+from django.views.generic.edit import CreateView
+
 #lets import our database access
 from .models import Phone
+from .forms import AccessoryForm
 
 
 #import http
@@ -33,4 +37,13 @@ def phones_index(request):
 def phones_detail(request, phone_id):
     #function receives phone_id from the url in the path established in urls.py
     phone = Phone.objects.get(id=phone_id)
-    return render(request, 'phones/detail.html', { 'phone': phone })
+    #form for accessory add
+    accessory_form = AccessoryForm()
+    return render(request, 'phones/detail.html', { 
+        'phone' : phone,
+        'accessory_form' : accessory_form
+        })
+
+class PhoneCreate(CreateView):
+    model = Phone
+    fields = '__all__'

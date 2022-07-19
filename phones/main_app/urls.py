@@ -11,5 +11,7 @@ urlpatterns = [
     path('phones/', views.phones_index, name='index'),
     # detail page
     path('phones/<int:phone_id>/', views.phones_detail, name='detail'),
+    #show form, create phone
+    path('phones/create/', views.PhoneCreate.as_view(), name='phones_create')
 
 ]
