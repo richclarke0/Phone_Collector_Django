@@ -12,6 +12,8 @@ urlpatterns = [
     # detail page
     path('phones/<int:phone_id>/', views.phones_detail, name='detail'),
     #show form, create phone
-    path('phones/create/', views.PhoneCreate.as_view(), name='phones_create')
+    path('phones/create/', views.PhoneCreate.as_view(), name='phones_create'),
+    path('phones/<int:pk>/update/', views.PhoneUpdate.as_view(), name='phones_update'),
+    path('phones/<int:pk>/delete/', views.PhoneDelete.as_view(), name='phones_delete'),
 
 ]

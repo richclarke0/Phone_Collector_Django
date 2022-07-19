@@ -7,7 +7,7 @@
 
 from django.shortcuts import render
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 #lets import our database access
 from .models import Phone
@@ -48,3 +48,11 @@ class PhoneCreate(CreateView):
     model = Phone
     fields = '__all__'
     success_url="/phones/"
+
+class PhoneUpdate(UpdateView):
+    model = Phone
+    fields = '__all__'
+
+class PhoneDelete(DeleteView):
+    model = Phone
+    success_url = '/cats/'

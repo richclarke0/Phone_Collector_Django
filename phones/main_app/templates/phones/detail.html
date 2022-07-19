@@ -9,8 +9,8 @@
         <img class="detailimg" src="{{ phone.img }}" alt="{{phone.manufacturer}} {{phone.model}}">
       </div>
       <div class="card-action">
-        {% comment %} <a href="{% url 'phones_update' phone.id %}">Edit</a>
-        <a href="{% url 'phones_delete' phone.id %}">Delete</a> {% endcomment %}
+        <a href="{% url 'phones_update' phone.id %}">Edit</a>
+        <a href="{% url 'phones_delete' phone.id %}">Delete</a>
       </div>
     </div>
   </div>
