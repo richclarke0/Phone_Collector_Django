@@ -15,5 +15,11 @@ urlpatterns = [
     path('phones/create/', views.PhoneCreate.as_view(), name='phones_create'),
     path('phones/<int:pk>/update/', views.PhoneUpdate.as_view(), name='phones_update'),
     path('phones/<int:pk>/delete/', views.PhoneDelete.as_view(), name='phones_delete'),
-    path('phones/<int:phone_id>/add_item', views.add_item, name='add_item')
+    path('phones/<int:phone_id>/add_item', views.add_item, name='add_item'),
+
+    path('bands/', views.BandList.as_view(), name='bands_index'),
+    path('bands/<int:pk>/', views.BandDetail.as_view(), name='bands_detail'),
+    path('bands/create/', views.BandCreate.as_view(), name='bands_create'),
+    path('bands/<int:pk>/update/', views.BandUpdate.as_view(), name='bands_update'),
+    path('bands/<int:pk>/delete/', views.BandDelete.as_view(), name='bands_delete'),
 ]

@@ -17,6 +17,7 @@ class Phone(models.Model):
     manufacturer = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     img = models.CharField(max_length=1000)
+    bands = models.ManyToManyField(Band)
     def __str__(self):
         return f"{self.manufacturer} {self.model}"
     def has_a_charger(self):
@@ -42,7 +43,13 @@ class Accessory(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"phone_id": self.id})
     
-
+class Band(models.Model):
+    type = models.CharField(max_length = 20)
+    def __str__(self):
+        return self.type
+    def get_absolute_url(self):
+        return reverse("bands_detail", kwargs={"pk": self.id})
+    
 
 
 

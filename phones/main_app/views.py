@@ -8,9 +8,10 @@
 from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 
 #lets import our database access
-from .models import Phone
+from .models import Phone, Band
 from .forms import AccessoryForm
 
 
@@ -64,3 +65,21 @@ class PhoneUpdate(UpdateView):
 class PhoneDelete(DeleteView):
     model = Phone
     success_url = '/phones/'
+
+class BandList(ListView):
+    model = Band
+
+class BandDetail(DetailView):
+    model = Band
+
+class BandCreate(CreateView):
+  model = Band
+  fields = '__all__'
+
+class BandUpdate(UpdateView):
+  model = Band
+  fields = ['type']
+
+class BandDelete(DeleteView):
+  model = Band
+  success_url = '/bands/'
