@@ -55,4 +55,4 @@ class PhoneUpdate(UpdateView):
 
 class PhoneDelete(DeleteView):
     model = Phone
-    success_url = '/cats/'
+    success_url = '/phones/'
