@@ -49,7 +49,7 @@
 {% comment %} this is the panel at the bottom with bands and other stuff {% endcomment %}
 <div class="row">
   <div class="col s6">
-    <h5>{{phone.manufacturer}}{{phone.model}} available bands:</h5>
+    <h5>{{phone.manufacturer}} {{phone.model}} available bands:</h5>
     {% if phone.bands.count %}
       {% for band in phone.bands.all %}
       <div class="card">
