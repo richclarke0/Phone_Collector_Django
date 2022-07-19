@@ -19,6 +19,10 @@ class Phone(models.Model):
     img = models.CharField(max_length=1000)
     def __str__(self):
         return f"{self.manufacturer} {self.model}"
+    def has_a_charger(self):
+        return self.accessory_set.filter(item="charger").count() >= 1
+    def has_a_case(self):
+        return self.accessory_set.filter(item="case").count() >= 1
 
 class Accessory(models.Model):
     date = models.DateField("Date purchased") #this is the actual label on the form

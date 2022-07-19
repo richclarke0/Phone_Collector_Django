@@ -21,7 +21,15 @@
       {{ accessory_form.as_p }}
       <input type="submit" class="btn" value="Add Accessory">
     </form>
-
+    {% if phone.has_a_charger and phone.has_a_case %}
+      <div>Those who are very wise, always go home with a charger and case. - Confucius</div>
+    {% elif phone.has_a_charger %}
+      <div>You really need to get a case for your phone.</div>
+    {% elif phone.has_a_case %}
+      <div>You really need to get a charger for your phone.</div>
+    {% else %}
+      <div>You really should get a charger and a case for your phone.</div>
+    {% endif %}
     <table class="striped">
       <thead>
         <tr><th>Date</th><th>Accessory</th></tr>
