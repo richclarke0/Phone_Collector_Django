@@ -26,7 +26,9 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
 
     #band association paths
-    path('phones/<int:phone_id>/assoc_band/<int:band_id>/', views.assoc_band, name='assoc_band')
+    path('phones/<int:phone_id>/assoc_band/<int:band_id>/', views.assoc_band, name='assoc_band'),
+    path('phones/<int:phone_id>/unassoc_band/<int:band_id>/', views.unassoc_band, name='unassoc_band')
+    
 
 
 ]

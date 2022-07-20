@@ -12,6 +12,8 @@ from django.views.generic import ListView, DetailView
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.control.auth.mixins import LoginRequiredMixin
 
 import uuid
 import boto3
@@ -36,12 +38,15 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def phones_index(request):
   #added this line below once we imported Phone from models
-  phones = Phone.objects.all() # command just like in the terminal with "python3 manage.py shell"!
-  return render(request, 'phones/index.html', { 'phones': phones })
+#   phones = Phone.objects.all() # command just like in the terminal with "python3 manage.py shell"!
+    phones = Phone.objects.filter(user=request.user)    
+    return render(request, 'phones/index.html', { 'phones': phones })
 
-#detail page
+
+@login_required
 def phones_detail(request, phone_id):
     #function receives phone_id from the url in the path established in urls.py
     phone = Phone.objects.get(id=phone_id)
@@ -54,6 +59,7 @@ def phones_detail(request, phone_id):
         'bands': bands_phone_doesnt_have
         })
 
+@login_required
 def add_item(request, phone_id):
     form=AccessoryForm(request.POST)
     if form.is_valid():
@@ -62,8 +68,14 @@ def add_item(request, phone_id):
         new_item.save()
     return redirect('detail', phone_id=phone_id)
 
+@login_required
 def assoc_band(request, phone_id, band_id):
     Phone.objects.get(id=phone_id).bands.add(band_id)
+    return redirect('detail', phone_id=phone_id)
+
+@login_required
+def unassoc_band(request, phone_id, band_id):
+    Phone.objects.get(id=phone_id).bands.remove(band_id)
     return redirect('detail', phone_id=phone_id)
 
 def add_photo(request, phone_id):
@@ -95,7 +107,7 @@ def signup(request):
     return render( request, 'registration/signup.html', context)
 
 
-class PhoneCreate(CreateView):
+class PhoneCreate(LoginRequiredMixin, CreateView):
     model = Phone
     fields = '__all__'
     success_url="/phones/"
@@ -103,28 +115,28 @@ class PhoneCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class PhoneUpdate(UpdateView):
+class PhoneUpdate(LoginRequiredMixin, UpdateView):
     model = Phone
     fields = '__all__'
 
-class PhoneDelete(DeleteView):
+class PhoneDelete(LoginRequiredMixin, DeleteView):
     model = Phone
     success_url = '/phones/'
 
-class BandList(ListView):
+class BandList(LoginRequiredMixin, ListView):
     model = Band
 
-class BandDetail(DetailView):
+class BandDetail(LoginRequiredMixin, DetailView):
     model = Band
 
-class BandCreate(CreateView):
+class BandCreate(LoginRequiredMixin, CreateView):
   model = Band
   fields = '__all__'
 
-class BandUpdate(UpdateView):
+class BandUpdate(LoginRequiredMixin, UpdateView):
   model = Band
   fields = ['type']
 
-class BandDelete(DeleteView):
+class BandDelete(LoginRequiredMixin, DeleteView):
   model = Band
   success_url = '/bands/'
