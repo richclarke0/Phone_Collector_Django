@@ -23,9 +23,16 @@
             <ul class="right">
               {% comment %} <li><a href="/about">About</a></li> {% endcomment %}
               <li><a href="{% url 'about' %}">About</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'bands_create' %}">Add a network type</a></li>
+              <li><a href="{% url 'bands_index' %}">Phone networks</a></li>
               <li><a href="{% url 'phones_create' %}">New Phone</a></li>
               {% comment %} <li><a href="/phones">Our Phones</a></li> {% endcomment %}
               <li><a href="{% url 'index'%}">Our Phones</a></li>
+              <li><a href="{% url 'logout' %}">Log Out</a></li>
+              {% else %}
+              <li><a href="{% url 'login' %}">Log In</a></li>
+              {% endif %}
             </ul>
           </div>
         </nav>
