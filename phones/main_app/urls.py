@@ -23,9 +23,10 @@ urlpatterns = [
     path('bands/create/', views.BandCreate.as_view(), name='bands_create'),
     path('bands/<int:pk>/update/', views.BandUpdate.as_view(), name='bands_update'),
     path('bands/<int:pk>/delete/', views.BandDelete.as_view(), name='bands_delete'),
+    path('accounts/signup/', views.signup, name='signup'),
 
     #band association paths
     path('phones/<int:phone_id>/assoc_band/<int:band_id>/', views.assoc_band, name='assoc_band')
-    
+
 
 ]

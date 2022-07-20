@@ -10,6 +10,9 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+
 import uuid
 import boto3
 
@@ -77,11 +80,28 @@ def add_photo(request, phone_id):
             print("S3 file upload error")
     return redirect('detail', phone_id=phone_id)
 
+def signup(request):
+    errormsg = ""
+    if request.method == 'POST':
+        form = UserCreatiomForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            errormsg = "Invalid signup"
+    form = UserCreationForm()
+    context = {'form': form, "error_message": errormsg}
+    return render( request, 'registration/signup.html', context)
+
 
 class PhoneCreate(CreateView):
     model = Phone
     fields = '__all__'
     success_url="/phones/"
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class PhoneUpdate(UpdateView):
     model = Phone
