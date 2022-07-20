@@ -26,5 +26,6 @@ urlpatterns = [
 
     #band association paths
     path('phones/<int:phone_id>/assoc_band/<int:band_id>/', views.assoc_band, name='assoc_band')
+    
 
 ]

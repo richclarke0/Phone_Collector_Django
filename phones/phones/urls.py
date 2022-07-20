@@ -24,4 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #represents the root with ''
     path('', include('main_app.urls')),
+    # this includes the django built-in auth urls for the built-in views
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
