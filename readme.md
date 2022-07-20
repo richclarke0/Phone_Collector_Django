@@ -48,3 +48,5 @@ DATABASES = {
     }
 }
 ```
+
+## at this point writing all this was taking too much time so i abandoned it lol
