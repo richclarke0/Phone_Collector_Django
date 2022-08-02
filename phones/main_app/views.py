@@ -95,7 +95,7 @@ def add_photo(request, phone_id):
 def signup(request):
     errormsg = ""
     if request.method == 'POST':
-        form = UserCreatiomForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
